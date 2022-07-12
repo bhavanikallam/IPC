@@ -22,7 +22,6 @@ class IpcTCPRequestHandler(socketserver.BaseRequestHandler):
     override the handle() method to implement communication to the
     client.
     """
-    @staticmethod
     def start_server():
         server = ThreadedTCPServer((HOST, PORT), IpcTCPRequestHandler)
         try:
