@@ -11,6 +11,8 @@ workType = "workType"
 EvaluateExpression = "EvaluateExpression"
 Echo = "Echo"
 
+HOST, PORT = "0.0.0.0", 9150
+
 
 class IpcTCPRequestHandler(socketserver.BaseRequestHandler):
     """
@@ -21,8 +23,8 @@ class IpcTCPRequestHandler(socketserver.BaseRequestHandler):
     client.
     """
     @staticmethod
-    def start_server(host, port):
-        server = ThreadedTCPServer((host, port), IpcTCPRequestHandler)
+    def start_server():
+        server = ThreadedTCPServer((HOST, PORT), IpcTCPRequestHandler)
         try:
             # activate the server
             server.serve_forever()
@@ -96,8 +98,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
 
 if __name__ == "__main__":
-    HOST, PORT = "0.0.0.0", 9150
-    IpcTCPRequestHandler.start_server(HOST, PORT)
+    IpcTCPRequestHandler.start_server()
 
 #     # instantiate the server, and bind to localhost on port 9150
 #     server = ThreadedTCPServer((HOST, PORT), IpcTCPRequestHandler)
@@ -107,7 +108,3 @@ if __name__ == "__main__":
 #         server.serve_forever()
 #     except KeyboardInterrupt:
 #         sys.exit(0)
-
-
-
-
