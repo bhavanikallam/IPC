@@ -20,6 +20,14 @@ class IpcTCPRequestHandler(socketserver.BaseRequestHandler):
     override the handle() method to implement communication to the
     client.
     """
+    @staticmethod
+    def start_server(host, port):
+        server = ThreadedTCPServer((host, port), IpcTCPRequestHandler)
+        try:
+            # activate the server
+            server.serve_forever()
+        except KeyboardInterrupt:
+            sys.exit(0)
 
     def handle(self):
         response = {}
@@ -87,20 +95,10 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     pass
 
 
-def start_server():
-    HOST, PORT = "0.0.0.0", 9150
-    server = ThreadedTCPServer((HOST, PORT), IpcTCPRequestHandler)
-    try:
-        # activate the server
-        server.serve_forever()
-    except KeyboardInterrupt:
-        sys.exit(0)
-
-
 if __name__ == "__main__":
-    start_server()
-#     HOST, PORT = "0.0.0.0", 9150
-#
+    HOST, PORT = "0.0.0.0", 9150
+    IpcTCPRequestHandler.start_server(HOST, PORT)
+
 #     # instantiate the server, and bind to localhost on port 9150
 #     server = ThreadedTCPServer((HOST, PORT), IpcTCPRequestHandler)
 #     # this will keep running until Ctrl-C
@@ -109,8 +107,4 @@ if __name__ == "__main__":
 #         server.serve_forever()
 #     except KeyboardInterrupt:
 #         sys.exit(0)
-
-
-
-
 
