@@ -1,5 +1,5 @@
 import json
-from IPCApp.expressions.datefn import *
+from apps.IPCApp.expressions.datefn import *
 
 Exp = "exp"
 Success = "success"
