@@ -1,4 +1,15 @@
+import os
 from setuptools import setup, find_packages
+
+project_path = os.path.dirname(os.path.dirname(__file__))
+
+
+# install_requires = []
+# with open(os.path.join(project_path, "ipc_req.txt"), encoding="utf-8") as fh:
+#     for line in fh:
+#         req_packages = line.strip()
+#         install_requires.append(req_packages)
+
 
 VERSION = '0.1'
 DESCRIPTION = 'TCPIPCSocketServer'
@@ -13,5 +24,6 @@ setup(
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
+    # install_requires=install_requires,
     install_requires=['pandas', 'pendulum', 'scipy']
 )
